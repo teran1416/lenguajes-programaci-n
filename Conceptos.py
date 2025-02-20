@@ -1,82 +1,80 @@
-# #Conceptos basicos de programacion funcional
+#Conceptos de programacion funcional
 
-# #1. Funciones son ciudadanos de primer orden
+#1. Funciones son ciudadanos de primer orden: Parametros. retornos, asignar variables
 
-# # la definicion de uan funcion puede ser asignada a una variable con referencia 
-# def suma (a,b):
-#     return a+b
+def suma(a, b):
+    return a+b
 
-# def resta(a,b):
-#     return a-b
+def resta(a, b):
+    return a-b
 
-# def multi(a,b):
-#     return a*b
+def multiplicacion(a, b):
+    return a*b
 
-# def div(a,b):
-#     if b != 0:
-#         return a/b
+def division(a, b):
+    if b != 0:
+        return a/b
 
-# val1 = int(input("ingrese valor 1"))
-# val2 = int(input("ingrese valor 2"))
-# op = int(input("ingrese la operacion: 1. suma 2. resta 3.multi 4. div"))
+val1 = int(input("Ingrese el primer valor: "))
+val2 = int(input("Ingrese el segundo valor: "))
+opt = int(input("Ingrese la operacion: 1. Suma 2. Resta 3. Multiplicacion 4. Division"))
 
-# if op == 1:
-#     operacion = suma
-# elif op == 2:
-#     operacion = resta
-# elif op == 3:
-#     operacion = multi
-# elif op == 4:
-#     operacion = div
-# else:
-#     print("Operacion no valida")
-    
-# print(f"el resultado es: {operacion(val1,val2)}")
+if opt == 1:
+    operacion = suma
+elif opt == 2:
+    operacion = resta
+elif opt == 3:
+    operacion = multiplicacion
+elif opt == 4:
+    operacion = division
+else:
+    print("Operacion no valida")
 
-# # x = suma
-# # y= suma
+print(f"El resultado es: {operacion(val1, val2)}")
 
-# # print(x(5,3))
-# # print(y(6,8))
+#2. Funciones puras: Solo usan parametros para recibir valores, no tocan variables globales
+# con las mismas entradas, producen mismos resultados (como ejemplo las operaciones de arriba)
+# Si toca variables globales o modifica los valores de entrada (generar nuevos datos), la funcion no es pura
 
+#3. Funciones anonimas (lambda): Una funcion en terminos genericos
+# lambda x: x % 2 == 0, recibe un parametro y retorna la evaluacion, tiene las mismas caracteristicas
+# de una funcion
 
+num = int(input("Ingrese un numero cualquiera: "))
+es_par = lambda x: x % 2 == 0
+print(f" {num} es par?: {es_par(num)}")
 
-# #Ejemplo: Una calculadora
+#4. Funciones de orden superior:
+# Son funciones que reciben como parametros otras funciones
+# a. Funcion MAP: Normalizar un conjunto de datos map(funcion, coleccion de datos) genera una nueva lista
+#                 mapeando cada uno de los elementos de la lista
+# b. Funcion FILTER:
+# c. Funcion REDUCE:
 
-# #2. Funciones puras
-# #3. funciones anonimas(lambda)
-# num = int(input("ingrese un numero cualquiera:"))
-# es_par = lambda x: x % 2 == 0
-# print(es_par(27))
-# print(f"{num} es par?: {es_par(num)}")
+#Forma larga:
+#Es una funcion pura?
+# Si es pura porque no toca variables, globales y los datos de entrada no son modificados para nada
+# Solo se crea una copia
 
-#4. funciones de orden superior
-
-# 4. a MAP
-#ejemplo sin map: normalizar un conjunto de datos:
 ciudades = ["Cali", "medellin", "BOGOTA", "bArrAnQuillA"]
- 
- #es una funcion pura?
+
 def normalizar_datos(lista_nombres):
     datos_norm = []
     for nombre in lista_nombres:
         datos_norm.append(nombre.capitalize())
     return datos_norm
 
-#usando map, sin funcion lambda:
+ciudades_norm = normalizar_datos(ciudades)
+print(f"Ciudades sin normalizar: {ciudades}")
+print(f"Ciudades normalizadas: {ciudades_norm}")
+
+# Ejemplo con la funcion map, sin funcion lambda
 def capitalizar(palabra):
-    #retorna la palabra con la inicial en mayuscula
-    return palabra.capitalize()
+    return palabra.capitalize() #capitalize es para retornar la palabra con la inicial en mayuscula
 
 ciudades_norm2 = list(map(capitalizar, ciudades))
+print(f"Datos normalizados: {ciudades_norm2}")
 
-
-ciudades_norm = normalizar_datos(ciudades)
-print(f"datos sin normalizar:{ciudades}")
-print(f"datos normalizados:{ciudades_norm}")
-print(f"Datos normalizados con map (sin lambda):{ciudades_norm2}")
-
-
-#ejemplo de una funcion de orden superior : map
-ciudades_norm3 = list(map (lambda n: n.capitalize(), ciudades))
-print(f"Datos normalizados con map (con lambda):{ciudades_norm3}")
+#Ejemplo con la funcion map, usando lambda
+ciudades_norm3 = list(map(lambda n: n.capitalize(), ciudades))
+print(f"Datos normalizados: {ciudades_norm3}")
